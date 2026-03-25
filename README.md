@@ -1,81 +1,70 @@
-# Multi-App-Factory
-Automated app generating system
+# Multi-App Factory
+High-speed app generation for AI agents.
 
-# 🚀 Complete Next.js Subscription Starter Template
+## Project Mission
+Multi-App Factory is a specialized environment built for generating SaaS applications at high speed with AI agents such as `Cursor`, `Windsurf`, and `Replit`.
 
-## 🚀 Complete Next.js Subscription Starter Template
-The all-in-one starter kit for building high-performance SaaS applications using Next.js, TailwindCSS, and Supabase.
+The factory takes a product brief and converts it into a deployable Next.js app, backed by Supabase (data + auth) and Stripe (subscriptions).
 
-> **Warning**: This app is a work in progress. I'm building this in public. Follow the progress on Twitter [@antoineross\_\_](https://twitter.com/antoineross__). Check out the features below.
+## The Chassis (Credit to Hikari)
+This project is built on top of the **Hikari Boilerplate** by Antoine Ross.
 
-## 🎉 Features
+We reuse the proven architecture as an AI-first generation chassis, with the core stack:
 
-- 🔐 **Complete Auth Package**: Secure user management and authentication with [Supabase](https://supabase.io/docs/guides/auth)
-- 🛠️ **Data Management**: Powerful data access & management tooling on top of PostgreSQL with [Supabase](https://supabase.io/docs/guides/database)
-- 💳 **Stripe Integration**: Seamless integration with [Stripe Checkout](https://stripe.com/docs/payments/checkout) and the [Stripe customer portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
-- 🌐 **Pricing & Subscriptions**: Automatic syncing of pricing plans and subscription statuses via [Stripe webhooks](https://stripe.com/docs/webhooks)
-- 🌈 **TailwindCSS & Tailwind UI**: Customized and flexible UI components with Tailwind UI
-- ⚛️ **React 18**: Enjoy the latest features and improvements with React 18
-- 📘 **TypeScript**: Strongly typed programming for better development experience
-- 🎨 **Shadcn/ui**: Beautiful and customizable UI components
-- 🔍 **Zod Validation**: Schema validation to keep your data safe and sound
-- 🧪 **Testing Tools**: Integrated unit and e2e testing with Jest, React Testing Library, and Playwright
-- 🧑‍💻 **Developer Experience**: ESLint, Prettier, Husky, and Commitlint for maintaining code quality and consistency
-- 📀 **Supabase storage** - Included are setting up policies, and handling image compression in the browser.
-- ⼬ **tRPC** - Included a guide on how to add a very lean trpc router for your api. You just need to add 3 folders, and 1 file.
-- ⚙️ **Local Development**: Develop locally with Supabase, Docker, and a set of custom commands
-- 📚 **Documentation & Blog**: Utilize MDX compiler from the open-source project Fumadocs for documentation and blog content.
+- Next.js (App Router, `14/15`-compatible)
+- Supabase (Postgres + Auth)
+- Stripe (subscriptions via webhooks)
+- `shadcn/ui` (Tailwind-based UI primitives)
 
-## 🎬 Demo
+## AI Factory Workflow
+The generation loop is intentionally simple and repeatable:
 
-[Live Demo](https://hikari.antoineross.com/)
+1. **Step A: Define PRD in `.cursorrules`**  
+   Write the PRD, acceptance criteria, and constraints directly into `.cursorrules` so the agent has an authoritative spec.
 
-**Hero Section:** ![Screenshot of demo](./public/hikari-landingpage.png)
+2. **Step B: Use Cursor Composer to generate features into the Hikari chassis**  
+   Open the repo in `Cursor`, start `Composer`, and attach your updated spec (including `.cursorrules`). The agent implements UI + server-side feature logic aligned to the existing Hikari structure.
 
-**Dashboard View:** ![Screenshot of dashboard](./public/hikari-dashboard.png)
+3. **Step C: Deploy instantly to Vercel**  
+   Push/deploy to `Vercel`. With Supabase + Stripe environment variables configured, the generated app comes online immediately.
 
-**Pricing Table:** ![Screenshot of pricing](./public/hikari-pricing.png)
+## Project Setup
+Simplified setup for Supabase and Stripe so you can run the generation chassis locally and in deployment.
 
-**Documentation:** ![Screenshot of documentation](./public/hikari-documentation.png)
+### Supabase
+1. Rename `.env.local.example` to `.env.local`.
+2. Start Supabase locally:
+   ```bash
+   pnpm supabase:start
+   ```
+3. Copy `service_role_key` output into `.env.local` as `SUPABASE_SERVICE_ROLE_KEY`.
+4. Confirm `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set (printed by Supabase during startup/status).
 
-**Blog:** ![Screenshot of blog](./public/hikari-blog.png)
+Optional (production URL correctness):
+- In your Supabase project, set the production URL in `auth > URL configuration`.
+- In Vercel, set `NEXT_PUBLIC_SITE_URL` to the same value (Production environment variable).
 
-## 📄 Quick Start Guide
+### Stripe
+1. Ensure Stripe **Test Mode** is enabled.
+2. In Stripe dashboard, copy:
+   - `Publishable key` -> `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+   - `Secret key` -> `STRIPE_SECRET_KEY`
+3. Start local webhook forwarding (endpoint must match the repo):
+   ```bash
+   stripe listen --forward-to http://localhost:3000/api/webhooks/stripe
+   ```
+4. Copy the printed webhook signing secret (e.g. `whsec_...`) into `.env.local` as `STRIPE_WEBHOOK_SECRET`.
 
-Get up and running quickly by following the [Quick Start Guide](https://hikari.antoineross.com/docs/quick-start).
+Optional (bootstrap products/pricing fixtures):
+- Edit `utils/stripe/fixtures/stripe-fixtures.json`, then run:
+  ```bash
+  pnpm stripe:fixtures
+  ```
 
-## 🧭 Implementation Workflows
-Follow the step-by-step process in [`workflows/ImplementationWorklfow.md`](workflows/ImplementationWorklfow.md).
+### Run locally
+```bash
+pnpm install
+pnpm dev
+```
 
-## 🚀 Going Live
-
-### **1. Archive Testing Products**
-
-Before going live, archive all test mode Stripe products. Switch Stripe from test mode to production mode and update your environment variables.
-
-### **2. Redeploy**
-
-After updating environment variables, redeploy your application through Vercel.
-
-## 📚 Additional Features
-
-- 📈 **Analytics Ready**: Easy integration with analytics tools like Google Analytics
-- 🌐 **I18n Support**: Built-in internationalization with Paraglide
-- 🔥 **Lighthouse Performance**: Achieve a perfect score with optimized performance, accessibility, and SEO
-
-## 🤝 Contribution
-
-To contribute:
-
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes and commit them.
-4. Push to the forked repository.
-5. Create a pull request.
-
-## ❤️ Support
-
-If you like the project, consider leaving a star. 🌟
-[![Star History Chart](https://api.star-history.com/svg?repos=antoineross/Hikari&type=Date)](https://star-history.com/#antoineross/Hikari&Date)
-
-Made by [Antoine Ross](https://antoineross.com).
+If you are testing webhooks locally, keep `stripe listen` running in a separate terminal while `pnpm dev` runs.
