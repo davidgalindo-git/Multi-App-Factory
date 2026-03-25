@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 # Multi-App-Factory
 Automated app generating system
-=======
-# 🚀 Complete Next.js Subscription Starter Template
 
+## 🚀 Complete Next.js Subscription Starter Template
 The all-in-one starter kit for building high-performance SaaS applications using Next.js, TailwindCSS, and Supabase.
 
 > **Warning**: This app is a work in progress. I'm building this in public. Follow the progress on Twitter [@antoineross\_\_](https://twitter.com/antoineross__). Check out the features below.
@@ -44,6 +42,9 @@ The all-in-one starter kit for building high-performance SaaS applications using
 
 Get up and running quickly by following the [Quick Start Guide](https://hikari.antoineross.com/docs/quick-start).
 
+## 🧭 Implementation Workflows
+Follow the step-by-step process in [`workflows/ImplementationWorklfow.md`](workflows/ImplementationWorklfow.md).
+
 ## 🚀 Going Live
 
 ### **1. Archive Testing Products**
@@ -76,4 +77,4 @@ If you like the project, consider leaving a star. 🌟
 [![Star History Chart](https://api.star-history.com/svg?repos=antoineross/Hikari&type=Date)](https://star-history.com/#antoineross/Hikari&Date)
 
 Made by [Antoine Ross](https://antoineross.com).
->>>>>>> template-source/main
+

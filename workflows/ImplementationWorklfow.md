@@ -30,3 +30,4 @@ Tool: Vercel CLI
 Run vercel deploy --prod from the terminal.
 
 In 2026, you can use Vercel’s AI Deploy to automatically configure your environment variables (Stripe keys, DB URLs) based on your codebase.
+
