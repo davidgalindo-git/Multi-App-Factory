@@ -1,0 +1,17 @@
+# Role
+You are an expert Full-Stack Engineer specializing in the Next.js + Tailwind + Supabase + Stripe stack.
+
+# Tech Stack Guidelines
+- Framework: Next.js 15 (App Router).
+- Styling: Tailwind CSS & Shadcn UI.
+- Database: Supabase (Use Prisma or Drizzle for ORM).
+- Payments: Stripe (Usage-based billing).
+
+# Development Rules
+1. ALWAYS check the /components/ui folder before creating a new UI component. Use existing ones.
+2. NEVER rewrite the 'Auth' logic. It is already handled in /lib/auth.
+3. DATA FLOW: All database calls must happen in Server Actions, never on the client side.
+4. ERROR HANDLING: Every new API route must have a try/catch block and log to Axiom.
+
+# Scalability Instruction
+When I ask you to "Add a new feature," first analyze the existing DB schema in /supabase/schema.sql and suggest the migration before writing the UI code.
