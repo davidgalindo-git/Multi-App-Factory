@@ -1,8 +1,10 @@
 'use client';
 
-import { features } from '@/config/features';
-import { motion } from 'framer-motion';
 import React from 'react';
+import { motion } from 'framer-motion';
+
+import { APP_CONFIG } from '@/config/app-config';
+import { LucideIcon } from '@/src/components/lucide-icon';
 
 export default function FeaturesHover() {
   return (
@@ -15,42 +17,32 @@ export default function FeaturesHover() {
           Features
         </h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          This project is a complete assortment of the best open source projects
-          that can be used for SaaS products. Built with Nextjs14 and Supabase
-          using the app router.
+          A clean SaaS starter that preserves the core chassis: auth, subscriptions,
+          and server-side APIs. Replace the marketing and product UI in minutes.
         </p>
       </div>
       <div className="mx-auto grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 md:max-w-[64rem]">
-        {features.map((feature) => (
-          <motion.div
-            whileHover={{ y: -8 }}
-            transition={{ type: 'spring', bounce: 0.7 }}
-            key={feature.title}
-            className="relative overflow-hidden rounded-lg border bg-background dark:bg-zinc-950 p-6"
-          >
-            <a target="_blank" rel="noopener noreferrer" href={feature.link}>
-              <svg
-                viewBox="0 0 24 24"
-                className="h-12 w-12 fill-current mb-4"
-                fill-rule={feature.fillRule}
-              >
-                <path d={feature.svgPath} />
-              </svg>
+        {APP_CONFIG.content.features.map((feature) => {
+          return (
+            <motion.div
+              whileHover={{ y: -8 }}
+              transition={{ type: 'spring', bounce: 0.7 }}
+              key={feature.title}
+              className="relative overflow-hidden rounded-lg border bg-background dark:bg-zinc-950 p-6"
+            >
+              <LucideIcon
+                iconName={feature.iconName}
+                className="h-12 w-12 text-primary mb-4"
+              />
               <div className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">
                 {feature.title}
               </div>
               <div className="text-sm font-normal text-gray-500 dark:text-gray-500">
-                {feature.description}
+                {feature.desc}
               </div>
-            </a>
-          </motion.div>
-        ))}
-      </div>
-      <div className="mx-auto text-center md:max-w-[58rem]">
-        {/* <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Hikari also includes a blog and a full-featured documentation site
-          built using Fumadocs and MDX.
-        </p> */}
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

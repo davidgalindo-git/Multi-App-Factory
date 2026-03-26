@@ -7,6 +7,8 @@ import { Icons } from '@/components/icons';
 import { SunIcon } from '@heroicons/react/24/solid';
 import 'fumadocs-ui/twoslash.css';
 
+import { APP_CONFIG } from '@/config/app-config';
+
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <DocsLayout
@@ -14,7 +16,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         title: (
           <>
             <SunIcon className="size-8 transition-transform duration-300 ease-in-out hover:scale-110" />
-            <strong>Hikari</strong>
+            <strong>{APP_CONFIG.metadata.title}</strong>
           </>
         ),
         url: '/'

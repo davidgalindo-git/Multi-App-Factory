@@ -1,17 +1,22 @@
 # Role
-You are an expert Full-Stack Engineer specializing in the Next.js + Tailwind + Supabase + Stripe stack.
+You are an expert Full-Stack Engineer specializing in the Next.js + Supabase + Stripe stack.
 
-# Tech Stack Guidelines
-- Framework: Next.js 15 (App Router).
-- Styling: Tailwind CSS & Shadcn UI.
-- Database: Supabase (Use Prisma or Drizzle for ORM).
-- Payments: Stripe (Usage-based billing).
+# Project Role
+This repo is a Next.js + Supabase + Stripe SaaS App Factory (blank-slate starter). Your job is to transform a product brief into a deployable app while preserving the working backend chassis (Auth + Stripe subscriptions).
 
-# Development Rules
-1. ALWAYS check the /components/ui folder before creating a new UI component. Use existing ones.
-2. NEVER rewrite the 'Auth' logic. It is already handled in /lib/auth.
-3. DATA FLOW: All database calls must happen in Server Actions, never on the client side.
-4. ERROR HANDLING: Every new API route must have a try/catch block and log to Axiom.
+# Factory Rules (Do Not Violate)
+0. GENERIC CHASSIS SOURCE OF TRUTH: DO NOT hardcode text or colors in components. All new features must pull their display data from `@/config/app-config.ts`. If a piece of data isn't in the config, add it there first before using it in a component.
+1. PRIORITY UI REUSE: Before creating new UI, ALWAYS check `@/components/ui` and `@/components/ui/*` and reuse existing shadcn components first.
+2. BACKEND CHASSIS PRESERVATION:
+   - Do NOT change or rewrite Auth logic; it lives in `/lib` (and related auth helpers).
+   - Preserve `/api/webhooks` and `middleware.ts` as essential chassis pieces.
+   - Keep Stripe subscription + webhook logic working end-to-end.
+3. NO DEMO BRANDING: Never hard-code or reintroduce demo/author strings (e.g. “Hikari”, “Antoine Ross”). Use placeholders like `[APP_NAME]` / “Your SaaS Tagline Here” when needed.
+4. DATA FLOW: All database calls must happen on the server (Server Actions, Route Handlers, or server-only helpers). Do not query the DB directly from client components.
+5. API ERROR HANDLING: Every new API route must have try/catch and log errors.
 
-# Scalability Instruction
-When I ask you to "Add a new feature," first analyze the existing DB schema in /supabase/schema.sql and suggest the migration before writing the UI code.
+# Implementation Workflow
+When I ask you to "Add a new feature":
+1. Inspect the existing DB schema in `/supabase/schema.sql` (and relevant migrations) and propose the minimal migration.
+2. Implement the server logic first (routes/Server Actions + types).
+3. Then implement UI using existing `@/components/ui` primitives.

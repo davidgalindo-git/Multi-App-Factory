@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { NavItem, iconComponents } from '@/config/dashboard';
+import { APP_CONFIG } from '@/config/app-config';
 
 const Sidebar = ({ navConfig }: { navConfig: NavItem[] }) => {
   const pathname = usePathname();
@@ -32,7 +33,7 @@ const Sidebar = ({ navConfig }: { navConfig: NavItem[] }) => {
           prefetch={false}
         >
           <Eclipse className="h-5 w-5 transition-all group-hover:scale-110" />
-          <span className="sr-only">Hikari Inc</span>
+          <span className="sr-only">{APP_CONFIG.metadata.title} Inc</span>
         </Link>
         {navConfig.map((item, index) => {
           const IconComponent =

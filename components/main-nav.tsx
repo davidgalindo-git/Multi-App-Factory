@@ -5,10 +5,11 @@ import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { MainNavItem } from 'types';
-import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { MobileNav } from '@/components/mobile-nav';
+import { APP_CONFIG } from '@/config/app-config';
+import { LucideIcon } from '@/src/components/lucide-icon';
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -22,9 +23,12 @@ export function MainNav({ items, children }: MainNavProps) {
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="hidden items-center space-x-2 md:flex">
-        <Icons.logo />
+        <LucideIcon
+          iconName={APP_CONFIG.branding.logoIconName}
+          className="size-4"
+        />
         <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
+          {APP_CONFIG.metadata.title}
         </span>
       </Link>
       {items?.length ? (
@@ -50,7 +54,14 @@ export function MainNav({ items, children }: MainNavProps) {
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
-        {showMobileMenu ? <Icons.close /> : <Icons.logo />}
+        {showMobileMenu ? (
+          <Icons.close />
+        ) : (
+          <LucideIcon
+            iconName={APP_CONFIG.branding.logoIconName}
+            className="size-4"
+          />
+        )}
         <span className="font-bold">Menu</span>
       </button>
       {showMobileMenu && items && (
