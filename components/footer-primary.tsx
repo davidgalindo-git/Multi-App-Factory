@@ -4,11 +4,8 @@ import React from 'react'
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { createClient } from '@supabase/supabase-js'
 import { useToast } from "@/components/ui/use-toast"
 import { CoolMode } from "@/components/magicui/cool-mode";
-
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
 const AnimatedUnderline = ({ children, href, className }: { children: React.ReactNode; href: string; className?: string }) => (
   <a 
@@ -26,26 +23,12 @@ export default function FooterPrimary() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    try {
-      const { error } = await supabase
-        .from('user_email_list')
-        .insert([{ email }])
-      
-      if (error) throw error
-
-      toast({
-        title: "Subscribed! 🎉",
-        description: "Thank you for subscribing! You will get an email when the app comes out.",
-      })
-      setEmail('')
-    } catch (error) {
-      console.error('Error inserting email:', error)
-      toast({
-        title: "Error",
-        description: "An error occurred. Please try again.",
-        variant: "destructive",
-      })
-    }
+    // Newsletter sign-up is intentionally client-only for this starter template.
+    toast({
+      title: "Thanks for subscribing!",
+      description: "We'll email you when [APP_NAME] launches.",
+    })
+    setEmail('')
   }
 
   return (
@@ -56,23 +39,23 @@ export default function FooterPrimary() {
             <h3 className="text-lg font-bold mb-4">Work</h3>
             <ul className="space-y-2">
               <li>
-                <AnimatedUnderline href="https://github.com/antoineross/hikari" className="text-primary">
-                  Hikari
-                </AnimatedUnderline>
-              </li>
-              <li>
-                <AnimatedUnderline href="https://supacrawler.com" className="text-primary">
-                  Supacrawler
-                </AnimatedUnderline>
-              </li>
-              <li>
-                <AnimatedUnderline href="https://github.com/antoineross/Autogen-UI" className="text-primary">
-                  Autogen UI
+                <AnimatedUnderline href="#" className="text-primary">
+                  [APP_NAME]
                 </AnimatedUnderline>
               </li>
               <li>
                 <AnimatedUnderline href="#" className="text-primary">
-                  See all →
+                  Integrations
+                </AnimatedUnderline>
+              </li>
+              <li>
+                <AnimatedUnderline href="#" className="text-primary">
+                  AI Tools
+                </AnimatedUnderline>
+              </li>
+              <li>
+                <AnimatedUnderline href="/docs" className="text-primary">
+                  See docs →
                 </AnimatedUnderline>
               </li>
             </ul>
@@ -86,7 +69,7 @@ export default function FooterPrimary() {
                 </AnimatedUnderline>
               </li>
               <li>
-                <AnimatedUnderline href="/documentation" className="text-primary">
+                <AnimatedUnderline href="/docs" className="text-primary">
                   Documentation
                 </AnimatedUnderline>
               </li>
@@ -96,7 +79,7 @@ export default function FooterPrimary() {
                 </AnimatedUnderline>
               </li>
               <li>
-                <AnimatedUnderline href="mailto:hello@antoineross.com" className="text-primary">
+                <AnimatedUnderline href="mailto:hello@yourcompany.com" className="text-primary">
                   Contact us
                 </AnimatedUnderline>
               </li>
@@ -106,17 +89,17 @@ export default function FooterPrimary() {
             <h3 className="text-lg font-bold mb-4">Connect</h3>
             <ul className="space-y-2">
               <li>
-                <AnimatedUnderline href="https://x.com/antoineross__" className="text-primary">
-                  X
+                <AnimatedUnderline href="#" className="text-primary">
+                  Social
                 </AnimatedUnderline>
               </li>
               <li>
-                <AnimatedUnderline href="https://linkedin.com/in/antoineross" className="text-primary">
+                <AnimatedUnderline href="#" className="text-primary">
                   LinkedIn
                 </AnimatedUnderline>
               </li>
               <li>
-                <AnimatedUnderline href="https://github.com/antoineross/hikari" className="text-primary">
+                <AnimatedUnderline href="#" className="text-primary">
                   GitHub
                 </AnimatedUnderline>
               </li>
@@ -127,8 +110,7 @@ export default function FooterPrimary() {
               Sign up for our newsletter
             </h3>
             <p className="text-primary mb-4">
-              Hikari is a growing project. Subscribe to get the latest design news, articles, resources, updates and
-              inspiration.
+              [APP_NAME] is a growing SaaS starter. Subscribe to get product updates and release notes.
             </p>
             <form onSubmit={handleSubmit} className="flex">
               <div className="flex items-center w-full border border-gray-300 rounded-md focus-within:outline-none">
@@ -158,9 +140,9 @@ export default function FooterPrimary() {
         <div className="border-t mt-10 pt-6 flex flex-col items-center md:flex-row justify-between">
           <div className="flex items-center space-x-2">
             <LogInIcon className="h-6 w-6" />
-            <span className="text-xl font-bold">Hikari.</span>
+            <span className="text-xl font-bold">[APP_NAME].</span>
           </div>
-          <p className="text-gray-500 mt-4 md:mt-0">© Hikari Inc. 2024</p>
+          <p className="text-gray-500 mt-4 md:mt-0">© [APP_NAME] Inc. 2026</p>
         </div>
       </div>
     </footer>

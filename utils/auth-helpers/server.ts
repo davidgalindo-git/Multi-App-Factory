@@ -263,10 +263,12 @@ export async function updateEmail(formData: FormData) {
   const newEmail = String(formData.get('newEmail')).trim();
 
   if (!isValidEmail(newEmail)) {
-    return getErrorRedirect(
+    redirect(
+      getErrorRedirect(
       '/dashboard/account',
       'Your email could not be updated.',
       'Invalid email address.'
+      )
     );
   }
 
@@ -288,16 +290,20 @@ export async function updateEmail(formData: FormData) {
   );
 
   if (error) {
-    return getErrorRedirect(
-      '/dashboard/account',
-      'Your email could not be updated.',
-      error.message
+    redirect(
+      getErrorRedirect(
+        '/dashboard/account',
+        'Your email could not be updated.',
+        error.message
+      )
     );
   } else {
-    return getStatusRedirect(
-      '/dashboard/account',
-      'Confirmation emails sent.',
-      `You will need to confirm the update by clicking the links sent to both the old and new email addresses.`
+    redirect(
+      getStatusRedirect(
+        '/dashboard/account',
+        'Confirmation emails sent.',
+        `You will need to confirm the update by clicking the links sent to both the old and new email addresses.`
+      )
     );
   }
 }
@@ -311,22 +317,28 @@ export async function updateName(formData: FormData) {
   });
 
   if (error) {
-    return getErrorRedirect(
-      '/dashboard/account',
-      'Your name could not be updated.',
-      error.message
+    redirect(
+      getErrorRedirect(
+        '/dashboard/account',
+        'Your name could not be updated.',
+        error.message
+      )
     );
   } else if (data.user) {
-    return getStatusRedirect(
-      '/dashboard/account',
-      'Success!',
-      'Your name has been updated.'
+    redirect(
+      getStatusRedirect(
+        '/dashboard/account',
+        'Success!',
+        'Your name has been updated.'
+      )
     );
   } else {
-    return getErrorRedirect(
-      '/dashboard/account',
-      'Hmm... Something went wrong.',
-      'Your name could not be updated.'
+    redirect(
+      getErrorRedirect(
+        '/dashboard/account',
+        'Hmm... Something went wrong.',
+        'Your name could not be updated.'
+      )
     );
   }
 }

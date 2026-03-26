@@ -6,8 +6,8 @@ Multi-App Factory is a specialized environment built for generating SaaS applica
 
 The factory takes a product brief and converts it into a deployable Next.js app, backed by Supabase (data + auth) and Stripe (subscriptions).
 
-## The Chassis (Credit to Hikari)
-This project is built on top of the **Hikari Boilerplate** by Antoine Ross.
+## The Chassis
+This project reuses a proven SaaS architecture as an AI-first generation chassis.
 
 We reuse the proven architecture as an AI-first generation chassis, with the core stack:
 
@@ -22,8 +22,8 @@ The generation loop is intentionally simple and repeatable:
 1. **Step A: Define PRD in `.cursorrules`**  
    Write the PRD, acceptance criteria, and constraints directly into `.cursorrules` so the agent has an authoritative spec.
 
-2. **Step B: Use Cursor Composer to generate features into the Hikari chassis**  
-   Open the repo in `Cursor`, start `Composer`, and attach your updated spec (including `.cursorrules`). The agent implements UI + server-side feature logic aligned to the existing Hikari structure.
+2. **Step B: Use Cursor Composer to generate features into the chassis**  
+   Open the repo in `Cursor`, start `Composer`, and attach your updated spec (including `.cursorrules`). The agent implements UI + server-side feature logic aligned to the existing architecture.
 
 3. **Step C: Deploy instantly to Vercel**  
    Push/deploy to `Vercel`. With Supabase + Stripe environment variables configured, the generated app comes online immediately.

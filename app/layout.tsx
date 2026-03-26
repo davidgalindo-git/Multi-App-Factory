@@ -49,11 +49,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: 'antoineross',
-      url: 'https://antoineross.com'
+      name: '[APP_NAME]',
+      url: 'https://yourdomain.com'
     }
   ],
-  creator: 'antoineross',
+  creator: '[APP_NAME]',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [`${siteConfig.url}/og.jpg`],
-    creator: '@antoineross'
+    creator: '@your_twitter_handle'
   },
   icons: {
     icon: '/favicon.ico',

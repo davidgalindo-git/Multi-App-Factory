@@ -1,13 +1,13 @@
 import { SiteConfig } from 'types';
 
 export const siteConfig: SiteConfig = {
-  name: 'Hikari',
+  name: '[APP_NAME]',
   description:
-    'A complete & open-source Next.js 14 Subscription Starter template using Supabase, Stripe, Tailwind CSS.',
-  url: 'https://hikari.antoineross.com',
-  ogImage: 'https://hikari.antoineross.com/og.jpg',
+    'Your SaaS Tagline Here. A Next.js + Supabase + Stripe starter template.',
+  url: 'https://yourdomain.com',
+  ogImage: 'https://yourdomain.com/og.jpg',
   links: {
-    twitter: 'https://twitter.com/antoineross__',
-    github: 'https://github.com/antoineross/hikari'
+    twitter: 'https://twitter.com/yourhandle',
+    github: 'https://github.com/your-org/your-repo'
   }
 };

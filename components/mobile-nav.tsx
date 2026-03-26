@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
+import { siteConfig } from '@/config/site';
 
 interface MobileNavProps {
   items: MainNavItem[];
@@ -26,7 +27,7 @@ export function MobileNav({ items, children, user }: MobileNavProps) {
       <div className="relative z-20 grid gap-6 rounded-md bg-popover p-4 text-popover-foreground shadow-md">
         <Link href="/" className="flex items-center space-x-2">
           <Icons.Eclipse />
-          <span className="font-bold">Hikari</span>
+          <span className="font-bold">{siteConfig.name}</span>
         </Link>
         <nav className="grid grid-flow-row auto-rows-max text-sm items-center flex text-center">
           {items.map((item, index) => (

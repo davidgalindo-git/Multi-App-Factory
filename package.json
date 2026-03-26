@@ -1,5 +1,7 @@
 {
   "private": true,
+  "name": "[APP_NAME]",
+  "description": "Your SaaS Tagline Here. Next.js + Supabase + Stripe starter.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

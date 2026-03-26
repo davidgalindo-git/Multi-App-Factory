@@ -1,5 +1,5 @@
 ---
-title: Example - Creating and editing posts using tRPC
+title: Example - Creating and editing items using tRPC
 description: Implementing tRPC in your Supabase Project
 ---
 
@@ -9,7 +9,7 @@ import Image from "next/image";
 
 ### 1. Defining Routes and Mutations
 
-In your `server/api/routers/posts.ts`, you define routes using `createTRPCRouter`. Each route can be a query or a mutation. For example, to create a post, you define a mutation like this:
+In your `server/api/routers/items.ts`, you define routes using `createTRPCRouter`. Each route can be a query or a mutation. For example, to create an item, you define a mutation like this:
 
 ```typescript
 import { z } from "zod";
@@ -17,12 +17,12 @@ import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { createClient } from "@/utils/supabase/server";
 import { TRPCError } from "@trpc/server";
 
-export const postsRouter = createTRPCRouter({
+export const itemsRouter = createTRPCRouter({
   create: protectedProcedure
     .input(z.object({ title: z.string().min(1), content: z.string().nullable() }))
     .mutation(async ({ input, ctx }) => {
       const { data, error } = await createClient()
-        .from('posts')
+        .from('items')
         .insert({
           user_id: ctx.user.id,
           title: input.title,
@@ -34,7 +34,7 @@ export const postsRouter = createTRPCRouter({
         .single();
 
       if (error) {
-        console.error("Error creating post:", error);
+        console.error("Error creating item:", error);
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
       }
       return data;
@@ -42,18 +42,18 @@ export const postsRouter = createTRPCRouter({
 });
 ```
 
-If you have already noticed, we use a **protectedProcedure** in the above example. This is because we use the `auth.session()` middleware in the `server/api/trpc/context.ts` file. This is a simple check to ensure that the user is authenticated before they can create or edit a post.
+If you have already noticed, we use a **protectedProcedure** in the above example. This is because we use the `auth.session()` middleware in the `server/api/trpc/context.ts` file. This is a simple check to ensure that the user is authenticated before they can create or edit an item.
 
 If you are using any database operation that requires authentication, you will need to use the `protectedProcedure` wrapper.
 
-To edit a post, you would use a similar mutation with the necessary input parameters:
+To edit an item, you would use a similar mutation with the necessary input parameters:
 
 ```typescript
   update: protectedProcedure
     .input(z.object({ id: z.number(), title: z.string().min(1), content: z.string().nullable() }))
     .mutation(async ({ input, ctx }) => {
       const { data, error } = await createClient()
-        .from('posts')
+        .from('items')
         .update({ 
           title: input.title, 
           content: input.content, 
@@ -65,26 +65,26 @@ To edit a post, you would use a similar mutation with the necessary input parame
         .single();
 
       if (error) {
-        console.error("Error updating post:", error);
+        console.error("Error updating item:", error);
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
       }
       return data;
     }),
 ```
 
-And finally, to get all posts, you would use a query:
+And finally, to get all items, you would use a query:
 
 ```typescript
   getAll: protectedProcedure
     .query(async ({ ctx }) => {
       const { data, error } = await createClient()
-        .from('posts')
+        .from('items')
         .select('*')
         .eq('user_id', ctx.user.id)
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error("Error fetching posts:", error);
+        console.error("Error fetching items:", error);
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
       }
       
@@ -92,51 +92,51 @@ And finally, to get all posts, you would use a query:
     }),
 ```
 
-The structure of building API's with tRPC is simple. If you want to see the rest of the code for the posts router, you can view it [here](https://github.com/antoineross/hikari/server/api/routers/posts.ts).
+The structure of building API's with tRPC is simple. If you want to see the rest of the router code, open it in your repository at `server/api/routers/*`.
 
 ### 2. Calling tRPC in the Client
 
-In your client component, such as `components/posts.tsx`, you can call these routes using hooks provided by tRPC. For example, to fetch all posts, you would use:
+In your client component, such as `components/items.tsx`, you can call these routes using hooks provided by tRPC. For example, to fetch all items, you would use:
 
 ```typescript
 import { useQuery } from "@tanstack/react-query";
 import { trpc } from "@/utils/trpc";
 
-// Getting the posts
+// Getting the items
 
-const { data: posts, isLoading, error: fetchError } = api.posts.getAll.useQuery()
+const { data: items, isLoading, error: fetchError } = api.items.getAll.useQuery()
 
-// Creating a post
-const createPost = api.posts.create.useMutation({
+// Creating an item
+const createItem = api.items.create.useMutation({
   onSuccess: async () => {
-    await utils.posts.getAll.invalidate()
-    setNewPost({ title: '', content: '' })
+    await utils.items.getAll.invalidate()
+    setNewItem({ title: '', content: '' })
     toast({
       title: "Success",
-      description: "Post created successfully!",
+      description: "Item created successfully!",
     })
   },
 })
 
-// Updating a post
-const updatePost = api.posts.update.useMutation({
+// Updating an item
+const updateItem = api.items.update.useMutation({
   onSuccess: async () => {
-    await utils.posts.getAll.invalidate()
-    setEditingPost(null)
+    await utils.items.getAll.invalidate()
+    setEditingItem(null)
     toast({
       title: "Success",
-      description: "Post updated successfully!",
+      description: "Item updated successfully!",
     })
   },
 })
 
-// Deleting a post
-const deletePost = api.posts.delete.useMutation({
+// Deleting an item
+const deleteItem = api.items.delete.useMutation({
   onSuccess: async () => {
-    await utils.posts.getAll.invalidate()
+    await utils.items.getAll.invalidate()
     toast({
       title: "Success",
-      description: "Post deleted successfully!",
+      description: "Item deleted successfully!",
     })
   },
 })
@@ -148,4 +148,4 @@ tRPC streamlines the development process by allowing you to define your API rout
 
 ### Important Note
 
-A new SQL file for the posts has been added. If anyone from a previous version of Hikari wants to try it locally, they need to run [this](https://github.com/antoineross/hikari/blob/main/supabase/migrations/20240918141953_posts.sql) SQL file to set up the necessary database structure.
+A new SQL file for the demo table has been added. If you are recreating the database locally, run the latest Supabase migration(s) to set up the necessary database structure.

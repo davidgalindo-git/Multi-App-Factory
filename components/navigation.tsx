@@ -8,6 +8,7 @@ import { MobileNav } from '@/components/mobile-nav';
 import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
+import { siteConfig } from '@/config/site';
 import { SunIcon } from '@heroicons/react/24/solid'
 
 interface CircularNavProps {
@@ -29,7 +30,7 @@ export default function CircularNavigation({
         <div className="bg-slate-50 dark:bg-slate-900 p-1 rounded-full">
           <SunIcon className="size-8 transition-transform duration-300 ease-in-out hover:scale-110" />
         </div>
-        <span className="text-lg md:text-xl font-extrabold tracking-tightest">HIKARI</span>
+        <span className="text-lg md:text-xl font-extrabold tracking-tightest">{siteConfig.name}</span>
       </div>
       {items?.length ? (
         <div className="hidden md:flex space-x-6">
