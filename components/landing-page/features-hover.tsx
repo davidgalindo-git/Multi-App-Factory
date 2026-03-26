@@ -2,47 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  CreditCard,
-  Database,
-  LayoutDashboard,
-  Lock,
-  ShieldCheck,
-  Zap
-} from 'lucide-react';
 
-const cleanFeatures = [
-  {
-    icon: ShieldCheck,
-    title: 'Authentication',
-    description: 'Supabase-powered sign-in with protected dashboard routes.'
-  },
-  {
-    icon: CreditCard,
-    title: 'Subscriptions',
-    description: 'Stripe Checkout + webhooks with a working subscription model.'
-  },
-  {
-    icon: Database,
-    title: 'Postgres Data Layer',
-    description: 'RLS-enabled tables for customers, products, prices, and access.'
-  },
-  {
-    icon: Lock,
-    title: 'Secure API',
-    description: 'Middleware + TRPC routes designed for safe, server-side data access.'
-  },
-  {
-    icon: LayoutDashboard,
-    title: 'Dashboard UI',
-    description: 'A clean, responsive dashboard surface ready for your product.'
-  },
-  {
-    icon: Zap,
-    title: 'Next.js Chassis',
-    description: 'Production-ready App Router structure you can prompt into anything.'
-  }
-];
+import { APP_CONFIG } from '@/config/app-config';
+import { LucideIcon } from '@/src/components/lucide-icon';
 
 export default function FeaturesHover() {
   return (
@@ -60,23 +22,25 @@ export default function FeaturesHover() {
         </p>
       </div>
       <div className="mx-auto grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 md:max-w-[64rem]">
-        {cleanFeatures.map((feature) => {
-          const Icon = feature.icon;
+        {APP_CONFIG.content.features.map((feature) => {
           return (
-          <motion.div
-            whileHover={{ y: -8 }}
-            transition={{ type: 'spring', bounce: 0.7 }}
-            key={feature.title}
-            className="relative overflow-hidden rounded-lg border bg-background dark:bg-zinc-950 p-6"
-          >
-            <Icon className="h-12 w-12 text-primary mb-4" />
+            <motion.div
+              whileHover={{ y: -8 }}
+              transition={{ type: 'spring', bounce: 0.7 }}
+              key={feature.title}
+              className="relative overflow-hidden rounded-lg border bg-background dark:bg-zinc-950 p-6"
+            >
+              <LucideIcon
+                iconName={feature.iconName}
+                className="h-12 w-12 text-primary mb-4"
+              />
               <div className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-100">
                 {feature.title}
               </div>
               <div className="text-sm font-normal text-gray-500 dark:text-gray-500">
-                {feature.description}
+                {feature.desc}
               </div>
-          </motion.div>
+            </motion.div>
           );
         })}
       </div>

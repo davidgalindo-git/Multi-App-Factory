@@ -15,6 +15,8 @@ import {
 } from '@/components/ui/card';
 import { redirect } from 'next/navigation';
 
+import { APP_CONFIG } from '@/config/app-config';
+
 export default async function DashboardPage() {
   const supabase = createClient();
   const [user, userDetails] = await Promise.all([getUser(supabase), getUserDetails(supabase)]);
@@ -34,7 +36,7 @@ export default async function DashboardPage() {
               Welcome{userDetails?.full_name ? `, ${userDetails.full_name}` : ''}!
             </CardTitle>
             <CardDescription>
-              This is your blank-slate dashboard for [APP_NAME].
+              This is your blank-slate dashboard for {APP_CONFIG.metadata.title}.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

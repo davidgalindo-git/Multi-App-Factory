@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { PropsWithChildren, Suspense } from 'react';
 import { getURL } from '@/utils/helpers';
-import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
@@ -11,6 +10,9 @@ import localFont from 'next/font/local';
 import type { Viewport } from 'next';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { TRPCReactProvider } from '@/trpc/react';
+
+import { APP_CONFIG } from '@/config/app-config';
+import { hexToHslTriplet } from '@/src/utils/theme/hex-to-hsl';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -36,10 +38,10 @@ const fontHeading = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(getURL()),
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`
+    default: APP_CONFIG.metadata.title,
+    template: `%s | ${APP_CONFIG.metadata.title}`
   },
-  description: siteConfig.description,
+  description: APP_CONFIG.metadata.description,
   keywords: [
     'Next.js',
     'React',
@@ -49,38 +51,52 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: '[APP_NAME]',
-      url: 'https://yourdomain.com'
+      name: APP_CONFIG.metadata.name,
+      url: APP_CONFIG.metadata.url
     }
   ],
-  creator: '[APP_NAME]',
+  creator: APP_CONFIG.metadata.name,
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name
+    url: APP_CONFIG.metadata.url,
+    title: APP_CONFIG.metadata.title,
+    description: APP_CONFIG.metadata.description,
+    siteName: APP_CONFIG.metadata.title
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
+    title: APP_CONFIG.metadata.title,
+    description: APP_CONFIG.metadata.description,
+    images: [APP_CONFIG.metadata.ogImage],
     creator: '@your_twitter_handle'
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: APP_CONFIG.branding.faviconPath,
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png'
   },
-  manifest: `${siteConfig.url}/site.webmanifest`
+  manifest: `${APP_CONFIG.metadata.url}/site.webmanifest`
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {
+  const primary = hexToHslTriplet(APP_CONFIG.theming.primaryColor);
+  const secondary = hexToHslTriplet(APP_CONFIG.theming.secondaryColor);
+  const radius = APP_CONFIG.theming.borderRadius;
+  const cssVars = `
+:root{--primary:${primary};--secondary:${secondary};--radius:${radius};}
+.dark{--primary:${primary};--secondary:${secondary};--radius:${radius};}
+`;
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: cssVars
+          }}
+        />
+      </head>
       <body
         className={cn(
           'min-h-screen bg-background font-mono antialiased',
@@ -88,7 +104,11 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           fontHeading.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme={APP_CONFIG.theming.darkMode ? 'system' : 'light'}
+          enableSystem={APP_CONFIG.theming.darkMode}
+        >
           <RootProvider>
             <TRPCReactProvider>{children}</TRPCReactProvider>
           </RootProvider>

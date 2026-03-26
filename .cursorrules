@@ -5,6 +5,7 @@ You are an expert Full-Stack Engineer specializing in the Next.js + Supabase + S
 This repo is a Next.js + Supabase + Stripe SaaS App Factory (blank-slate starter). Your job is to transform a product brief into a deployable app while preserving the working backend chassis (Auth + Stripe subscriptions).
 
 # Factory Rules (Do Not Violate)
+0. GENERIC CHASSIS SOURCE OF TRUTH: DO NOT hardcode text or colors in components. All new features must pull their display data from `@/config/app-config.ts`. If a piece of data isn't in the config, add it there first before using it in a component.
 1. PRIORITY UI REUSE: Before creating new UI, ALWAYS check `@/components/ui` and `@/components/ui/*` and reuse existing shadcn components first.
 2. BACKEND CHASSIS PRESERVATION:
    - Do NOT change or rewrite Auth logic; it lives in `/lib` (and related auth helpers).

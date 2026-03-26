@@ -2,6 +2,8 @@ import { Icons } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
 import { Eclipse, Github } from 'lucide-react';
 
+import { APP_CONFIG } from '@/config/app-config';
+
 export default function FooterBlog() {
   return (
     <footer className="py-10 w-full">
@@ -10,7 +12,7 @@ export default function FooterBlog() {
         <div className="flex flex-col items-center md:flex-row justify-between">
           <div className="flex items-center space-x-2">
             <Icons.Eclipse className="h-6 w-6" />
-            <span className="text-xl font-bold">[APP_NAME].</span>
+            <span className="text-xl font-bold">{APP_CONFIG.metadata.title}.</span>
           </div>
           <div className="flex flex-col items-center md:items-end space-y-2 md:space-y-0">
             <div className="flex items-center space-x-4">
@@ -22,7 +24,7 @@ export default function FooterBlog() {
                   rel="noopener noreferrer"
                   className="underline"
                 >
-                  [APP_AUTHOR]
+                  {APP_CONFIG.metadata.title}
                 </a>
               </p>
               <a

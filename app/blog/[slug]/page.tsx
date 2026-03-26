@@ -6,6 +6,7 @@ import { blog } from '@/utils/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { Control } from './page.client';
+import { replaceAppTokens } from '@/src/utils/replace-app-tokens';
 
 interface Param {
   slug: string;
@@ -22,6 +23,10 @@ export default function Page({
 
   if (!page) notFound();
 
+  const title = replaceAppTokens(page.data.title);
+  const description = replaceAppTokens(page.data.description ?? '');
+  const author = replaceAppTokens(page.data.author);
+
   return (
     <>
       <div
@@ -37,9 +42,9 @@ export default function Page({
         }}
       >
         <h1 className="mb-2 text-3xl font-bold text-white">
-          {page.data.title}
+          {title}
         </h1>
-        <p className="mb-4 text-white/80">{page.data.description}</p>
+        <p className="mb-4 text-white/80">{description}</p>
         <Link
           href="/blog"
           className={buttonVariants({ size: 'sm', variant: 'secondary' })}
@@ -55,7 +60,7 @@ export default function Page({
         <div className="flex flex-col gap-4 border-l p-4 text-sm">
           <div>
             <p className="mb-1 text-muted-foreground">Written by</p>
-            <p className="font-medium">{page.data.author}</p>
+            <p className="font-medium">{author}</p>
           </div>
           <div>
             <p className="mb-1 text-sm text-muted-foreground">At</p>
@@ -75,10 +80,15 @@ export function generateMetadata({ params }: { params: Param }): Metadata {
 
   if (!page) notFound();
 
+  const title = replaceAppTokens(page.data.title);
+  const description = page.data.description
+    ? replaceAppTokens(page.data.description)
+    : undefined;
+
   return createMetadata({
-    title: page.data.title,
+    title,
     description:
-      page.data.description ?? 'The library for building documentation sites'
+      description ?? 'The library for building documentation sites'
   });
 }
 

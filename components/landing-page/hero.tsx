@@ -7,6 +7,8 @@ import { buttonVariants } from '@/components/ui/button';
 import Particles from '@/components/magicui/particles';
 import Ripple from '@/components/magicui/ripple';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
+import { APP_CONFIG } from '@/config/app-config';
+import { applyAppTemplate } from '@/src/utils/app-template';
 
 export default function HeroSection() {
   const { theme } = useTheme();
@@ -32,15 +34,17 @@ export default function HeroSection() {
               'dark:border-white/5 dark:bg-neutral-900 dark:text-neutral-200'
             )}
           >
-            Your SaaS Tagline Here
+            {APP_CONFIG.metadata.description}
           </div>
 
           <h1 className="font-heading tracking-tight font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl">
-            Build a production-ready SaaS with [APP_NAME]
+            {applyAppTemplate(APP_CONFIG.content.heroTitle, {
+              APP_NAME: APP_CONFIG.metadata.name
+            })}
           </h1>
 
           <p className="max-w-[42rem] text-primary sm:text-xl sm:leading-8">
-            Launch authentication, subscriptions, and core app pages with a proven Next.js + Supabase + Stripe chassis.
+            {APP_CONFIG.content.heroSubtitle}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">

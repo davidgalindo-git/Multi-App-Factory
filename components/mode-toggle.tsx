@@ -10,9 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { APP_CONFIG } from '@/config/app-config';
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+
+  if (!APP_CONFIG.theming.darkMode) return null;
 
   return (
     <DropdownMenu>

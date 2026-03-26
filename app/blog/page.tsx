@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { blog } from '@/utils/source';
+import { APP_CONFIG } from '@/config/app-config';
 
 export default function Page(): React.ReactElement {
   const posts = [...blog.getPages()].sort(
@@ -44,7 +45,7 @@ export default function Page(): React.ReactElement {
           }}
         >
           <h1 className="mb-4 border-b-4 border-foreground pb-2 text-4xl font-bold md:text-5xl">
-            [APP_NAME] Blog
+            {APP_CONFIG.metadata.title} Blog
           </h1>
           <p className="text-sm md:text-base">
             Product updates, guides, and documentation content.
