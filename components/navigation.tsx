@@ -25,9 +25,9 @@ export default function CircularNavigation({
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
   return (
-    <nav className="flex flex-wrap items-center justify-between w-full md:w-fit p-2 md:p-1 gap-4 md:gap-20 md:bg-zinc-50 md:dark:bg-zinc-900 md:rounded-full md:px-8 md:border-2 md:border-muted/30 md:dark:border-muted/80 md:shadow-md mx-auto mt-4 backdrop-blur-sm md:backdrop-blur-none">
+    <nav className="flex flex-wrap items-center justify-between w-full md:w-fit p-2 md:p-1 gap-4 md:gap-20 md:bg-card/60 md:rounded-full md:px-8 md:border md:shadow-sm mx-auto mt-4 backdrop-blur-sm">
       <div className="flex items-center space-x-2">
-        <div className="bg-slate-50 dark:bg-slate-900 p-1 rounded-full">
+        <div className="bg-secondary/10 p-1 rounded-full border">
           <SunIcon className="size-8 transition-transform duration-300 ease-in-out hover:scale-110" />
         </div>
         <span className="text-lg md:text-xl font-extrabold tracking-tightest">
@@ -41,7 +41,7 @@ export default function CircularNavigation({
               key={index}
               href={item.disabled ? '#' : item.href}
               className={cn(
-                'text-primary transition-colors hover:text-foreground/80',
+                'text-secondary transition-colors hover:text-foreground/80',
                 item.disabled && 'cursor-not-allowed opacity-80'
               )}
             >
@@ -58,7 +58,7 @@ export default function CircularNavigation({
           href={user ? '/dashboard' : '/signin'}
           className={cn(
             buttonVariants({ variant: 'outline', size: 'sm' }),
-            'rounded-full p-2 md:p-5 text-xs md:text-sm hidden md:inline-flex'
+            'rounded-full p-2 md:p-5 text-xs md:text-sm hidden md:inline-flex border-secondary text-secondary hover:text-secondary'
           )}
         >
           {user ? 'Dashboard' : 'Login'}

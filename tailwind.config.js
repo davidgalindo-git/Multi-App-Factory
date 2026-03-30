@@ -48,7 +48,9 @@ module.exports = {
         128: '32rem'
       },
       backgroundImage: {
-        'pattern-12': "url('/patterns/12.svg')"
+        'pattern-12': "url('/patterns/12.svg')",
+        'brand-gradient':
+          'linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%)'
       },
       colors: {
         border: 'hsl(var(--border))',

@@ -15,6 +15,8 @@ export type AppConfig = Readonly<{
   branding: Readonly<{
     logoIconName: LucideIconName;
     faviconPath: string;
+    showTestimonials: boolean;
+    showFaqs: boolean;
   }>;
   theming: Readonly<{
     primaryColor: string; // hex
@@ -25,6 +27,8 @@ export type AppConfig = Readonly<{
   content: Readonly<{
     heroTitle: string;
     heroSubtitle: string;
+    heroCtaText: string;
+    secondaryCtaText: string;
     features: ReadonlyArray<
       Readonly<{
         title: string;
@@ -36,7 +40,9 @@ export type AppConfig = Readonly<{
     faqs: typeof faqItems;
   }>;
   business: Readonly<{
+    legalName: string;
     contactEmail: string;
+    supportEmail: string;
     socialLinks: Readonly<{
       github?: string;
       twitter?: string;
@@ -60,7 +66,9 @@ export const APP_CONFIG: AppConfig = {
   },
   branding: {
     logoIconName: 'Command',
-    faviconPath: '/favicon.ico'
+    faviconPath: '/favicon.ico',
+    showTestimonials: true,
+    showFaqs: true
   },
   theming: {
     primaryColor: '#4f46e5',
@@ -72,6 +80,8 @@ export const APP_CONFIG: AppConfig = {
     heroTitle: 'Build a production-ready SaaS with {{APP_NAME}}',
     heroSubtitle:
       'Launch authentication, subscriptions, and core app pages with a proven Next.js + Supabase + Stripe chassis.',
+    heroCtaText: 'Get Started',
+    secondaryCtaText: 'View Pricing',
     features: [
       {
         iconName: 'ShieldCheck',
@@ -108,7 +118,9 @@ export const APP_CONFIG: AppConfig = {
     faqs: faqItems
   },
   business: {
+    legalName: '[APP_NAME] Inc.',
     contactEmail: 'hello@yourcompany.com',
+    supportEmail: 'support@yourcompany.com',
     socialLinks: {
       github: 'https://github.com/your-org/your-repo',
       twitter: 'https://twitter.com/yourhandle',

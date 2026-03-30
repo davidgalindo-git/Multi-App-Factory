@@ -1,5 +1,5 @@
 import { APP_CONFIG as MASTER } from '../src/config/app-config';
-import { APP_CONFIG as TEST } from '../src/config/test-neon-face';
+import { APP_CONFIG as TEST } from '../src/config/test-coffee';
 
 // IMPORTANT:
 // This toggle must ALWAYS be set to `false` before any production deployment.
