@@ -1,7 +1,7 @@
 # APP_FACTORY_ROADMAP.md
 
 ## Step 1: Infrastructure Upgrade & Visual Stress Test
-- **Status:** In Progress
+- **Status:** Completed
 - **Goal:** Upgrade the "DNA" of the app to be 99% automated, then test with the Coffee App.
 
 ### Prompt for Cursor:
@@ -24,6 +24,13 @@
 >    - Are the icons Coffee-themed?
 > 
 > Report back with a 'Vibe Check' summary of what updated."
+
+Vibe Check (Coffee / BeanStream AI):
+- Hero primary CTA now reads: `Start My Roast Profile`.
+- Hero secondary CTA now reads: `Explore Subscription Plans`.
+- Global theme token injection: CSS `--primary` reflects Deep Brown `#3e2723` (HSL converted in `app/layout.tsx`).
+- Features grid uses Coffee-flavored config values (e.g., `Roast Matching`, `Reliable Delivery`, `Smart Scheduling`) and Coffee-related iconName values.
+- Testimonials + FAQ sections render because `APP_CONFIG.branding.showTestimonials` and `APP_CONFIG.branding.showFaqs` are `true`.
 
 ---
 

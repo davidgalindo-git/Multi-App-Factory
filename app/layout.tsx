@@ -83,9 +83,58 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   const primary = hexToHslTriplet(APP_CONFIG.theming.primaryColor);
   const secondary = hexToHslTriplet(APP_CONFIG.theming.secondaryColor);
   const radius = APP_CONFIG.theming.borderRadius;
+
+  const parseTriplet = (triplet: string) => {
+    const [hRaw, sRaw, lRaw] = triplet.split(' ');
+    const h = Number.parseFloat(hRaw);
+    const s = Number.parseFloat((sRaw ?? '0').replace('%', ''));
+    const l = Number.parseFloat((lRaw ?? '0').replace('%', ''));
+    return { h, s, l };
+  };
+
+  const formatTriplet = (h: number, s: number, l: number) =>
+    `${Math.round(h)} ${Math.max(0, Math.min(100, s)).toFixed(1).replace(/\.0$/, '')}% ${Math.max(0, Math.min(100, l)).toFixed(1).replace(/\.0$/, '')}%`;
+
+  // Derive a cohesive dark palette from primary/secondary.
+  const p = parseTriplet(primary);
+  const s = parseTriplet(secondary);
+  const darkBackground = formatTriplet(p.h, Math.min(25, p.s), 8);
+  const darkCard = formatTriplet(p.h, Math.min(28, p.s), 12);
+  const darkMuted = formatTriplet(p.h, Math.min(18, p.s), 16);
+  const darkBorder = formatTriplet(p.h, Math.min(20, p.s), 18);
+  const darkRing = formatTriplet(s.h, s.s, Math.max(55, s.l));
+
+  const lightBackground = '0 0% 100%';
+  const lightForeground = '240 10% 3.9%';
+  const darkForeground = '0 0% 98%';
+
   const cssVars = `
-:root{--primary:${primary};--secondary:${secondary};--radius:${radius};}
-.dark{--primary:${primary};--secondary:${secondary};--radius:${radius};}
+:root{
+  --primary:${primary};
+  --secondary:${secondary};
+  --accent:${secondary};
+  --ring:${secondary};
+  --radius:${radius};
+  --background:${lightBackground};
+  --foreground:${lightForeground};
+}
+.dark{
+  --primary:${primary};
+  --secondary:${secondary};
+  --accent:${secondary};
+  --ring:${darkRing};
+  --radius:${radius};
+  --background:${darkBackground};
+  --foreground:${darkForeground};
+  --card:${darkCard};
+  --card-foreground:${darkForeground};
+  --popover:${darkCard};
+  --popover-foreground:${darkForeground};
+  --muted:${darkMuted};
+  --muted-foreground:240 5% 64.9%;
+  --border:${darkBorder};
+  --input:${darkBorder};
+}
 `;
 
   return (

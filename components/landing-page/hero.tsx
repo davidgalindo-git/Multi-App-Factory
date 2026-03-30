@@ -30,17 +30,19 @@ export default function HeroSection() {
         <div className="relative z-10 flex max-w-[64rem] flex-col items-center gap-6 text-center mx-auto">
           <div
             className={cn(
-              'rounded-full border border-black/5 bg-neutral-100 text-base text-secondary px-4 py-2',
-              'dark:border-white/5 dark:bg-neutral-900 dark:text-neutral-200'
+              'rounded-full border bg-card/60 text-base text-secondary px-4 py-2 backdrop-blur-sm',
+              'text-foreground/80'
             )}
           >
             {APP_CONFIG.metadata.description}
           </div>
 
           <h1 className="font-heading tracking-tight font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl">
-            {applyAppTemplate(APP_CONFIG.content.heroTitle, {
-              APP_NAME: APP_CONFIG.metadata.name
-            })}
+            <span className="bg-brand-gradient bg-clip-text text-transparent">
+              {applyAppTemplate(APP_CONFIG.content.heroTitle, {
+                APP_NAME: APP_CONFIG.metadata.name
+              })}
+            </span>
           </h1>
 
           <p className="max-w-[42rem] text-primary sm:text-xl sm:leading-8">
@@ -52,19 +54,20 @@ export default function HeroSection() {
               href="/signup"
               className={cn(
                 buttonVariants({ size: 'xl' }),
-                'rounded-full border-2 border-primary dark:border-white text-bold text-white'
+                'rounded-full'
               )}
             >
-              Get Started
+              {APP_CONFIG.content.heroCtaText}
             </Link>
             <Link
               href="/pricing"
               className={cn(
                 buttonVariants({ variant: 'outline', size: 'xl' }),
-                'rounded-full border-2 border-primary dark:border-white text-semibold'
+                'rounded-full border-secondary text-secondary hover:text-secondary'
               )}
             >
-              View Pricing <ArrowRightIcon className="ml-2" />
+              {APP_CONFIG.content.secondaryCtaText}{" "}
+              <ArrowRightIcon className="ml-2" />
             </Link>
           </div>
         </div>

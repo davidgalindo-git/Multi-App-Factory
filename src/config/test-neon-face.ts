@@ -18,7 +18,9 @@ export const APP_CONFIG: AppConfig = {
   },
   branding: {
     logoIconName: 'Command',
-    faviconPath: '/favicon.ico'
+    faviconPath: '/favicon.ico',
+    showTestimonials: true,
+    showFaqs: true
   },
   theming: {
     // Cyberpunk neon pink + teal accents.
@@ -31,6 +33,8 @@ export const APP_CONFIG: AppConfig = {
     heroTitle: 'Turn portraits into neon-grade headshots with {{APP_NAME}}',
     heroSubtitle:
       'Ship a production-ready AI headshot SaaS: auth, subscriptions, and a full customer-ready chassis powered by Next.js + Supabase + Stripe.',
+    heroCtaText: 'Launch Neon Studio',
+    secondaryCtaText: 'View Plans',
     features: [
       {
         iconName: 'Sparkles',
@@ -67,12 +71,14 @@ export const APP_CONFIG: AppConfig = {
     faqs: faqItems
   },
   business: {
+    legalName: 'NeonFace AI Inc.',
     contactEmail: 'contact@neonface.ai',
     socialLinks: {
       github: 'https://github.com/your-org/your-repo',
       twitter: 'https://twitter.com/neonface_ai',
       linkedin: 'https://www.linkedin.com/in/neonface-ai/'
     },
+    supportEmail: 'support@neonface.ai',
     stripePriceIds: {
       free: '',
       pro: ''

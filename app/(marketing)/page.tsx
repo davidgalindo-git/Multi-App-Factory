@@ -5,6 +5,7 @@ import LogoCloud from '@/components/landing-page/logo-cloud-svg';
 import FeaturesHover from '@/components/landing-page/features-hover';
 import Pricing from '@/components/pricing/pricing-primary';
 import Link from 'next/link';
+import { APP_CONFIG } from '@/config/app-config';
 
 export default async function IndexPage() {
   return (
@@ -13,7 +14,7 @@ export default async function IndexPage() {
         <LogoCloud />
         <FeaturesHover />
         <Pricing />
-        <Testimonials />
+          {APP_CONFIG.branding.showTestimonials ? <Testimonials /> : null}
         <section className="my-16">
           <div className="flex items-center w-full mb-8">
             <div className="flex flex-col items-center justify-center w-full">
@@ -28,7 +29,7 @@ export default async function IndexPage() {
             </div>
           </div>
         </section>
-      <FAQSection />
+          {APP_CONFIG.branding.showFaqs ? <FAQSection /> : null}
     </div>
   );
 }
